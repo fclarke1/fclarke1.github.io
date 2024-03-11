@@ -1,0 +1,10 @@
+---
+title: "Exploration"
+format: html
+listing:
+    type: default
+    sort: "date desc"
+    categories: true
+---
+
+Exploring is fun, and I find the best way to learn. So any little bits I want to understand more, or find interesting I'll drop in here

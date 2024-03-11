@@ -1,0 +1,7 @@
+---
+title: '404'
+---
+
+Not sure where that page has gone, try looking at a different one
+
+[Home](https://fclarke1.github.io)

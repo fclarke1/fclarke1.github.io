@@ -2,9 +2,44 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Portfolio",
+    "title": "Fred Clarke",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "I’m a Data Scientist based in London, recently graduated from UCL with my Masters in Data Science & Machine Learning.\nI love understanding the fundementals of why things happen. Sometimes that’s software, mathematical theory, or fiddling with That’s what this site is for, so I’ve got somewhere to put my little explorations of topics."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Fred Clarke",
+    "section": "Education",
+    "text": "Education\nUniversity Collage London | 2021 - 2023 MSc Data Science & Machine Learning | Distinction\nUniversity of Warwick | 2011 - 2014 BSc Mathematics | 1st (Hons)"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Fred Clarke",
+    "section": "Experience",
+    "text": "Experience\nDeepZen | Machine Learning Researcher | Jan 2024 - Present\nDeepZen | Machine Learning Internship | May 2023 - Aug 2023\nMOJU | Data Analytics Engineer | Sep 2022 - Mar 2023\nMOJU | Data and Business Intelligence Manager | Feb 2022 - Sep 2022\nMOJU | Operations Manager | Oct 2019 - Feb 2022"
+  },
+  {
+    "objectID": "index.html#fun",
+    "href": "index.html#fun",
+    "title": "Fred Clarke",
+    "section": "Fun",
+    "text": "Fun\nRock climbing | Reading | Anything involving the sea (sailing, SUP, swimming)"
+  },
+  {
+    "objectID": "exploration/index.html",
+    "href": "exploration/index.html",
+    "title": "Exploration",
+    "section": "",
+    "text": "Exploring is fun, and I find the best way to learn. So any little bits I want to understand more, or find interesting I’ll drop in here\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariational AutoEncoders\n\n\n\n\n\n\nmachine learning\n\n\n\nGenerating digits using VAEs\n\n\n\n\n\nMar 11, 2024\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Here are some of my more standalone projects\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariational AutoEncoders\n\n\n\n\n\n\nmachine learning\n\n\n\nGenerating digits using VAEs\n\n\n\n\n\nMar 11, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -12,5 +47,61 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "projects/vae.html",
+    "href": "projects/vae.html",
+    "title": "Variational AutoEncoders",
+    "section": "",
+    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
+  },
+  {
+    "objectID": "projects/vae.html#what-is-an-autoencoder",
+    "href": "projects/vae.html#what-is-an-autoencoder",
+    "title": "Variational AutoEncoders",
+    "section": "",
+    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
+  },
+  {
+    "objectID": "projects/vae.html#how-does-it-work",
+    "href": "projects/vae.html#how-does-it-work",
+    "title": "Variational AutoEncoders",
+    "section": "How does it work",
+    "text": "How does it work\nA machine learning model that tries to predict the input as it’s output. So ideally it’s learning the identity function. However it’s designed with a information bottleneck in the middle.\nThe hope is the model will learn the key features of the input and discard less useful information."
+  },
+  {
+    "objectID": "projects/vae.html#why-use-autoencoders",
+    "href": "projects/vae.html#why-use-autoencoders",
+    "title": "Variational AutoEncoders",
+    "section": "Why use AutoEncoders?",
+    "text": "Why use AutoEncoders?\nThere are few reasons:\n\nUnsupervised Learning Notice that during our training the input itself was the label? This means you can learn from a large dataset without any labels. Then the learnt latent space can be fine-tuned or used for many other things. For example Wav2Vec is a fine-tuned latent space, pre-trained on a large dataset of speech audio followed by fine-tuning for speech recognition on a smaller labelled dataset\nGenerating new objects they can be the start of generating new data. Take any point in the latent space and put it through the decoder and you’ll get a new object. But there’s no gaurantee it will look great. That’s where VAE comes in"
+  },
+  {
+    "objectID": "exploration/vae.html",
+    "href": "exploration/vae.html",
+    "title": "Variational AutoEncoders",
+    "section": "",
+    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
+  },
+  {
+    "objectID": "exploration/vae.html#what-is-an-autoencoder",
+    "href": "exploration/vae.html#what-is-an-autoencoder",
+    "title": "Variational AutoEncoders",
+    "section": "",
+    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
+  },
+  {
+    "objectID": "exploration/vae.html#how-does-it-work",
+    "href": "exploration/vae.html#how-does-it-work",
+    "title": "Variational AutoEncoders",
+    "section": "How does it work",
+    "text": "How does it work\nA machine learning model that tries to predict the input as it’s output. So ideally it’s learning the identity function. However it’s designed with a information bottleneck in the middle.\nThe hope is the model will learn the key features of the input and discard less useful information."
+  },
+  {
+    "objectID": "exploration/vae.html#why-use-autoencoders",
+    "href": "exploration/vae.html#why-use-autoencoders",
+    "title": "Variational AutoEncoders",
+    "section": "Why use AutoEncoders?",
+    "text": "Why use AutoEncoders?\nThere are few reasons:\n\nUnsupervised Learning Notice that during our training the input itself was the label? This means you can learn from a large dataset without any labels. Then the learnt latent space can be fine-tuned or used for many other things. For example Wav2Vec is a fine-tuned latent space, pre-trained on a large dataset of speech audio followed by fine-tuning for speech recognition on a smaller labelled dataset\nGenerating new objects they can be the start of generating new data. Take any point in the latent space and put it through the decoder and you’ll get a new object. But there’s no gaurantee it will look great. That’s where VAE comes in"
   }
 ]

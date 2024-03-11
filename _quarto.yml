@@ -2,12 +2,23 @@ project:
   type: website
 
 website:
-  title: "Portfolio"
+  title: "Fred Clarke"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
+      - text: Home
+        href: index.qmd
+      - text: Projects
+        href: projects/index.qmd
+      - text: Exploration
+        href: exploration/index.qmd
       - about.qmd
+  page-footer: 
+    left: "Copyright 2024, Fred Clarke" 
+    right: 
+      - icon: github
+        href: https://github.com/fclarke1
+      - icon: linkedin
+        href: https://www.linkedin.com/in/clarkefred/
 
 format:
   html:

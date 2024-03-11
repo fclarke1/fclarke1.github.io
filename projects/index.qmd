@@ -1,0 +1,10 @@
+---
+title: "Projects"
+format: html
+listing:
+    type: default
+    sort: "date desc"
+    categories: true
+---
+
+Here are some of my more standalone projects

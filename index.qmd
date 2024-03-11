@@ -1,7 +1,41 @@
 ---
-title: "Portfolio"
+title: ""
+about:
+    id: hero-heading
+    template: trestles
+    image: profile.png
+toc: false
 ---
 
-This is a Quarto website.
+:::{#hero-heading}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I'm a Data Scientist based in London, recently graduated from UCL with my Masters in Data Science & Machine Learning.
+
+I love understanding the fundementals of why things happen. Sometimes that's software, mathematical theory, or fiddling with That's what this site is for, so I've got somewhere to put my little [explorations](exploration/index.qmd) of topics.
+
+
+
+:::
+
+## Education
+University Collage London | 2021 - 2023
+MSc Data Science & Machine Learning | Distinction
+
+University of Warwick | 2011 - 2014
+BSc Mathematics | 1st (Hons)
+
+
+## Experience
+DeepZen | Machine Learning Researcher | Jan 2024 - Present
+
+DeepZen | Machine Learning Internship | May 2023 - Aug 2023
+
+MOJU | Data Analytics Engineer | Sep 2022 - Mar 2023
+
+MOJU | Data and Business Intelligence Manager | Feb 2022 - Sep 2022
+
+MOJU | Operations Manager | Oct 2019 - Feb 2022
+
+
+## Fun
+Rock climbing | [Reading](https://www.goodreads.com/user/show/56492507-fred) | Anything involving the sea (sailing, SUP, swimming)

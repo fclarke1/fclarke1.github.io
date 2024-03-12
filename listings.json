@@ -1,0 +1,14 @@
+[
+  {
+    "listing": "/exploration/index.html",
+    "items": [
+      "/exploration/vae.html"
+    ]
+  },
+  {
+    "listing": "/projects/index.html",
+    "items": [
+      "/projects/vae.html"
+    ]
+  }
+]

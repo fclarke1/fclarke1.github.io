@@ -19,6 +19,7 @@ website:
         href: https://github.com/fclarke1
       - icon: linkedin
         href: https://www.linkedin.com/in/clarkefred/
+  search: false
 
 format:
   html:

@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Fred Clarke",
     "section": "",
-    "text": "I’m a Data Scientist based in London, recently graduated from UCL with my Masters in Data Science & Machine Learning.\nI love understanding the fundementals of why things happen. Sometimes that’s software, mathematical theory, or fiddling with That’s what this site is for, so I’ve got somewhere to put my little explorations of topics."
+    "text": "I’m a Data Scientist based in London, recently graduated from UCL with my Masters in Data Science & Machine Learning.\nI love creating little things to understand how things fundamentally work. That’s what this site is for, so I’ve got somewhere to put my little explorations of topics."
   },
   {
     "objectID": "index.html#education",
     "href": "index.html#education",
     "title": "Fred Clarke",
     "section": "Education",
-    "text": "Education\nUniversity Collage London | 2021 - 2023 MSc Data Science & Machine Learning | Distinction\nUniversity of Warwick | 2011 - 2014 BSc Mathematics | 1st (Hons)"
+    "text": "Education\nUniversity Collage London | 2022 - 2023 MSc Data Science & Machine Learning | Distinction\nUniversity of Warwick | 2011 - 2014 BSc Mathematics | 1st (Hons)"
   },
   {
     "objectID": "index.html#experience",
@@ -32,7 +32,7 @@
     "href": "exploration/index.html",
     "title": "Exploration",
     "section": "",
-    "text": "Exploring is fun, and I find the best way to learn. So any little bits I want to understand more, or find interesting I’ll drop in here\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariational AutoEncoders\n\n\n\n\n\n\nmachine learning\n\n\n\nGenerating digits using VAEs\n\n\n\n\n\nMar 11, 2024\n\n\n\n\n\n\nNo matching items"
+    "text": "Exploring is fun, and I find the best way to learn. So any little bits I want to understand more, or find interesting I’ll drop in here\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutoEncoders vs Variational AutoEncoders\n\n\n\n\n\n\nmachine learning\n\n\n\nWhat is a Variational AutoEncoder, and how does it differ from a Variational AutoEncoder?\n\n\n\n\n\nMar 11, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/index.html",
@@ -79,29 +79,15 @@
   {
     "objectID": "exploration/vae.html",
     "href": "exploration/vae.html",
-    "title": "Variational AutoEncoders",
+    "title": "AutoEncoders vs Variational AutoEncoders",
     "section": "",
-    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
+    "text": "This write up is in progress - however the code for this project is completed and there is a shorter write up with code on my GitHub"
   },
   {
-    "objectID": "exploration/vae.html#what-is-an-autoencoder",
-    "href": "exploration/vae.html#what-is-an-autoencoder",
-    "title": "Variational AutoEncoders",
-    "section": "",
-    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
-  },
-  {
-    "objectID": "exploration/vae.html#how-does-it-work",
-    "href": "exploration/vae.html#how-does-it-work",
-    "title": "Variational AutoEncoders",
-    "section": "How does it work",
-    "text": "How does it work\nA machine learning model that tries to predict the input as it’s output. So ideally it’s learning the identity function. However it’s designed with a information bottleneck in the middle.\nThe hope is the model will learn the key features of the input and discard less useful information."
-  },
-  {
-    "objectID": "exploration/vae.html#why-use-autoencoders",
-    "href": "exploration/vae.html#why-use-autoencoders",
-    "title": "Variational AutoEncoders",
-    "section": "Why use AutoEncoders?",
-    "text": "Why use AutoEncoders?\nThere are few reasons:\n\nUnsupervised Learning Notice that during our training the input itself was the label? This means you can learn from a large dataset without any labels. Then the learnt latent space can be fine-tuned or used for many other things. For example Wav2Vec is a fine-tuned latent space, pre-trained on a large dataset of speech audio followed by fine-tuning for speech recognition on a smaller labelled dataset\nGenerating new objects they can be the start of generating new data. Take any point in the latent space and put it through the decoder and you’ll get a new object. But there’s no gaurantee it will look great. That’s where VAE comes in"
+    "objectID": "exploration/vae.html#whats-the-purpose-of-an-autoencoder",
+    "href": "exploration/vae.html#whats-the-purpose-of-an-autoencoder",
+    "title": "AutoEncoders vs Variational AutoEncoders",
+    "section": "What’s the purpose of an AutoEncoder?",
+    "text": "What’s the purpose of an AutoEncoder?\nThere are a few benefits of an AutoEncoder: 1. Unsupervised Learning In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.\n\nDimensionality Reduction Having a latent space that has hopefully learnt the key information of an object (eg. handwritten digit images) can be incredibly useful. These representations can then be used in other processes. For example Facebook did something similar when creating a speech representation called wav2vec 2.0 which was learnt solely from unlabelled speech audio to learn a latent space. Then the Wav2Vec 2.0 latent space was in a model for Automatic Speech Recognition.\nGenerating New Outputs Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. However there are issues doing this, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. That’s where the Variational AutoEncoder comes in"
   }
 ]

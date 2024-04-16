@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-03-11">
-<meta name="description" content="Generating digits using VAEs">
+<meta name="description" content="What is a Variational AutoEncoder, and how does it differ from a Variational AutoEncoder?">
 
-<title>Fred Clarke - Variational AutoEncoders</title>
+<title>Fred Clarke - AutoEncoders vs Variational AutoEncoders</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,9 +105,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-an-autoencoder" id="toc-what-is-an-autoencoder" class="nav-link active" data-scroll-target="#what-is-an-autoencoder">What is an AutoEncoder?</a></li>
-  <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How does it work</a></li>
-  <li><a href="#why-use-autoencoders" id="toc-why-use-autoencoders" class="nav-link" data-scroll-target="#why-use-autoencoders">Why use AutoEncoders?</a></li>
+  <li><a href="#what-is-an-autoencoder" id="toc-what-is-an-autoencoder" class="nav-link active" data-scroll-target="#what-is-an-autoencoder">What is an AutoEncoder?</a>
+  <ul class="collapse">
+  <li><a href="#whats-the-purpose-of-an-autoencoder" id="toc-whats-the-purpose-of-an-autoencoder" class="nav-link" data-scroll-target="#whats-the-purpose-of-an-autoencoder">What’s the purpose of an AutoEncoder?</a></li>
+  </ul></li>
+  <li><a href="#what-is-a-variational-autoencoder" id="toc-what-is-a-variational-autoencoder" class="nav-link" data-scroll-target="#what-is-a-variational-autoencoder">What is a Variational AutoEncoder</a></li>
   </ul>
 </nav>
     </div>
@@ -116,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Variational AutoEncoders</h1>
+<h1 class="title">AutoEncoders vs Variational AutoEncoders</h1>
   <div class="quarto-categories">
     <div class="quarto-category">machine learning</div>
   </div>
@@ -124,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Generating digits using VAEs
+    What is a Variational AutoEncoder, and how does it differ from a Variational AutoEncoder?
   </div>
 </div>
 
@@ -147,22 +149,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-an-autoencoder" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-an-autoencoder">What is an AutoEncoder?</h2>
-<p>AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits.</p>
-</section>
-<section id="how-does-it-work" class="level2">
-<h2 class="anchored" data-anchor-id="how-does-it-work">How does it work</h2>
-<p>A machine learning model that tries to predict the input as it’s output. So ideally it’s learning the identity function. However it’s designed with a information bottleneck in the middle.</p>
-<p>The hope is the model will learn the key features of the input and discard less useful information.</p>
-</section>
-<section id="why-use-autoencoders" class="level2">
-<h2 class="anchored" data-anchor-id="why-use-autoencoders">Why use AutoEncoders?</h2>
-<p>There are few reasons:</p>
-<ol type="1">
-<li><p>Unsupervised Learning Notice that during our training the input itself was the label? This means you can learn from a large dataset without any labels. Then the learnt latent space can be fine-tuned or used for many other things. For example Wav2Vec is a fine-tuned latent space, pre-trained on a large dataset of speech audio followed by fine-tuning for speech recognition on a smaller labelled dataset</p></li>
-<li><p>Generating new objects they can be the start of generating new data. Take any point in the latent space and put it through the decoder and you’ll get a new object. But there’s no gaurantee it will look great. That’s where VAE comes in</p></li>
+<p>This write up is in progress - however the code for this project is completed and there is a <a href="https://github.com/fclarke1/autoencoders-and-vae">shorter write up with code on my GitHub</a></p>
+<section id="what-is-an-autoencoder" class="level1">
+<h1>What is an AutoEncoder?</h1>
+<p>AutoEncoders are a clever way to learn a latent representation of whatever object you have. It’s a model that is trained to output it’s input. This sounds strange but the trick is the model has an information bottleneck by reducing the dimensionality in the middle of the model. This means if the model is able to output a very good representation of the input with the bottleneck, it has learnt a reduced dimensionality representation of the input. The hope is the model has learnt the key features defining the input and it’s discarded less useful information.</p>
+<p>Lets see a simple example using the MNIST handwritten digit dataset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vae/autoencoder_model.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Autoencoder Model with it’s 2 parts, the encoder maps to the latent space, and the decoder maps from the latent space</figcaption>
+</figure>
+</div>
+<p>Now you can see there are 2 parts to the model. The encoder, which takes the input and reduces the dimensionality down to the latent space (the purple part). And the decoder, which takes the latent space and projects it back to the output dimensionality, and ideally looks similar to the input. There is no restriction on what architecture the encoder and decoder are (CNN, fully connected, RNN, etc.), what defines an autoencoder is an informational bottleneck and it’s output target is the input.</p>
+<p>The only loss required for an AutoEncoder is a reconstruction loss, ie. one that is minimising a metric distance between the input and the output. For simplicity in this project I’ll be using the <a href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">BinaryCrossEntropy</a></p>
+<section id="whats-the-purpose-of-an-autoencoder" class="level2">
+<h2 class="anchored" data-anchor-id="whats-the-purpose-of-an-autoencoder">What’s the purpose of an AutoEncoder?</h2>
+<p>There are a few benefits of an AutoEncoder: 1. Unsupervised Learning In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.</p>
+<ol start="2" type="1">
+<li><p>Dimensionality Reduction Having a latent space that has hopefully learnt the key information of an object (eg. handwritten digit images) can be incredibly useful. These representations can then be used in other processes. For example Facebook did something similar when creating a speech representation called <a href="https://ai.meta.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/">wav2vec 2.0</a> which was learnt solely from unlabelled speech audio to learn a latent space. Then the Wav2Vec 2.0 latent space was in a model for Automatic Speech Recognition.</p></li>
+<li><p>Generating New Outputs Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. <strong>However there are issues doing this</strong>, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. <strong>That’s where the Variational AutoEncoder comes in</strong></p></li>
 </ol>
+</section>
+</section>
+<section id="what-is-a-variational-autoencoder" class="level1">
+<h1>What is a Variational AutoEncoder</h1>
 
 
 </section>

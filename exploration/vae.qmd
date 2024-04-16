@@ -1,10 +1,10 @@
 ---
-title: Variational AutoEncoders
+title: AutoEncoders vs Variational AutoEncoders
 format:
     html:
         code-fold: true
         code-summary: Code
-description: Generating digits using VAEs
+description: What is a Variational AutoEncoder, and how does it differ from a Variational AutoEncoder?
 fig-align: center
 categories:
   - machine learning
@@ -12,19 +12,28 @@ date-format: iso
 date: 2024-03-11
 ---
 
-## What is an AutoEncoder?
-AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that's numerical digits.
+This write up is in progress - however the code for this project is completed and there is a [shorter write up with code on my GitHub](https://github.com/fclarke1/autoencoders-and-vae)
 
-## How does it work
-A machine learning model that tries to predict the input as it's output. So ideally it's learning the identity function. However it's designed with a information bottleneck in the middle. 
+# What is an AutoEncoder?
+AutoEncoders are a clever way to learn a latent representation of whatever object you have. It's a model that is trained to output it's input. This sounds strange but the trick is the model has an information bottleneck by reducing the dimensionality in the middle of the model. This means if the model is able to output a very good representation of the input with the bottleneck, it has learnt a reduced dimensionality representation of the input. The hope is the model has learnt the key features defining the input and it's discarded less useful information.
 
-The hope is the model will learn the key features of the input and discard less useful information.
+Lets see a simple example using the MNIST handwritten digit dataset. 
 
-## Why use AutoEncoders?
-There are few reasons:
+![Autoencoder Model with it's 2 parts, the encoder maps to the latent space, and the decoder maps from the latent space](vae/autoencoder_model.png){width=80%}
 
+Now you can see there are 2 parts to the model. The encoder, which takes the input and reduces the dimensionality down to the latent space (the purple part). And the decoder, which takes the latent space and projects it back to the output dimensionality, and ideally looks similar to the input. There is no restriction on what architecture the encoder and decoder are (CNN, fully connected, RNN, etc.), what defines an autoencoder is an informational bottleneck and it's output target is the input.
+
+The only loss required for an AutoEncoder is a reconstruction loss, ie. one that is minimising a metric distance between the input and the output. For simplicity in this project I'll be using the [BinaryCrossEntropy](https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html) 
+
+## What's the purpose of an AutoEncoder?
+There are a few benefits of an AutoEncoder:
 1. Unsupervised Learning
-Notice that during our training the input itself was the label? This means you can learn from a large dataset without any labels. Then the learnt latent space can be fine-tuned or used for many other things. For example Wav2Vec is a fine-tuned latent space, pre-trained on a large dataset of speech audio followed by fine-tuning for speech recognition on a smaller labelled dataset
+In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.
 
-2. Generating new objects
-they can be the start of generating new data. Take any point in the latent space and put it through the decoder and you'll get a new object. But there's no gaurantee it will look great. That's where VAE comes in
+2. Dimensionality Reduction
+Having a latent space that has hopefully learnt the key information of an object (eg. handwritten digit images) can be incredibly useful. These representations can then be used in other processes. For example Facebook did something similar when creating a speech representation called [wav2vec 2.0](https://ai.meta.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/) which was learnt solely from unlabelled speech audio to learn a latent space. Then the Wav2Vec 2.0 latent space was in a model for Automatic Speech Recognition.
+
+3. Generating New Outputs
+Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. **However there are issues doing this**, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. **That's where the Variational AutoEncoder comes in**
+
+# What is a Variational AutoEncoder

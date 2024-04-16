@@ -11,14 +11,14 @@ toc: false
 
 I'm a Data Scientist based in London, recently graduated from UCL with my Masters in Data Science & Machine Learning.
 
-I love understanding the fundementals of why things happen. Sometimes that's software, mathematical theory, or fiddling with That's what this site is for, so I've got somewhere to put my little [explorations](exploration/index.qmd) of topics.
+I love creating little things to understand how things fundamentally work. That's what this site is for, so I've got somewhere to put my little [explorations](exploration/index.qmd) of topics.
 
 
 
 :::
 
 ## Education
-University Collage London | 2021 - 2023
+University Collage London | 2022 - 2023
 MSc Data Science & Machine Learning | Distinction
 
 University of Warwick | 2011 - 2014

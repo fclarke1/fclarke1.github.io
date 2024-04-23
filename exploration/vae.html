@@ -107,16 +107,20 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../projects/index.html"> 
-<span class="menu-text">Projects</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../exploration/index.html"> 
 <span class="menu-text">Exploration</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fclarke1"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/clarkefred/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -138,8 +142,16 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#whats-the-purpose-of-an-autoencoder" id="toc-whats-the-purpose-of-an-autoencoder" class="nav-link" data-scroll-target="#whats-the-purpose-of-an-autoencoder">What’s the purpose of an AutoEncoder?</a></li>
   </ul></li>
-  <li><a href="#what-is-a-variational-autoencoder" id="toc-what-is-a-variational-autoencoder" class="nav-link" data-scroll-target="#what-is-a-variational-autoencoder">What is a Variational AutoEncoder</a></li>
+  <li><a href="#what-is-a-variational-autoencoder" id="toc-what-is-a-variational-autoencoder" class="nav-link" data-scroll-target="#what-is-a-variational-autoencoder">What is a Variational AutoEncoder</a>
+  <ul class="collapse">
   <li><a href="#what-loss-is-used-with-a-variational-autoencoder" id="toc-what-loss-is-used-with-a-variational-autoencoder" class="nav-link" data-scroll-target="#what-loss-is-used-with-a-variational-autoencoder">What Loss is used with a Variational AutoEncoder?</a></li>
+  </ul></li>
+  <li><a href="#autoencoder-vs-variational-autoencoder" id="toc-autoencoder-vs-variational-autoencoder" class="nav-link" data-scroll-target="#autoencoder-vs-variational-autoencoder">AutoEncoder vs Variational AutoEncoder</a>
+  <ul class="collapse">
+  <li><a href="#performance-as-autoencoders" id="toc-performance-as-autoencoders" class="nav-link" data-scroll-target="#performance-as-autoencoders">Performance as AutoEncoders</a></li>
+  <li><a href="#generating-digits" id="toc-generating-digits" class="nav-link" data-scroll-target="#generating-digits">Generating Digits</a></li>
+  <li><a href="#latent-space-distribution" id="toc-latent-space-distribution" class="nav-link" data-scroll-target="#latent-space-distribution">Latent Space Distribution</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -179,7 +191,7 @@ window.Quarto = {
 </header>
 
 
-<p>This write up is in progress - however the code for this project is completed and there is a <a href="https://github.com/fclarke1/autoencoders-and-vae">shorter write up with code on my GitHub</a></p>
+<p><a href="https://github.com/fclarke1/autoencoders-and-vae">Here</a> is my code for any models and images used in this post.</p>
 <section id="what-is-an-autoencoder" class="level1">
 <h1>What is an AutoEncoder?</h1>
 <p>AutoEncoders are a clever way to learn a latent representation of whatever object you have. It’s a model that is trained to output it’s input. This sounds strange but the trick is the model has an information bottleneck by reducing the dimensionality in the middle of the model. This means if the model is able to output a very good representation of the input with the bottleneck, it has learnt a reduced dimensionality representation of the input. The hope is the model has learnt the key features defining the input and it’s discarded less useful information.</p>
@@ -194,8 +206,9 @@ window.Quarto = {
 <p>The only loss required for an AutoEncoder is a reconstruction loss, ie. one that is minimising a metric distance between the input and the output. For simplicity in this project I’ll be using the <a href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">BinaryCrossEntropy</a></p>
 <section id="whats-the-purpose-of-an-autoencoder" class="level2">
 <h2 class="anchored" data-anchor-id="whats-the-purpose-of-an-autoencoder">What’s the purpose of an AutoEncoder?</h2>
-<p>There are a few benefits of an AutoEncoder: 1. Unsupervised Learning In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.</p>
-<ol start="2" type="1">
+<p>There are a few benefits of an AutoEncoder:</p>
+<ol type="1">
+<li><p>Unsupervised Learning In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.</p></li>
 <li><p>Dimensionality Reduction Having a latent space that has hopefully learnt the key information of an object (eg. handwritten digit images) can be incredibly useful. These representations can then be used in other processes. For example Facebook did something similar when creating a speech representation called <a href="https://ai.meta.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/">wav2vec 2.0</a> which was learnt solely from unlabelled speech audio to learn a latent space. Then the Wav2Vec 2.0 latent space was in a model for Automatic Speech Recognition.</p></li>
 <li><p>Generating New Outputs Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. <strong>However there are issues doing this</strong>, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. <strong>That’s where the Variational AutoEncoder comes in</strong></p></li>
 </ol>
@@ -203,7 +216,7 @@ window.Quarto = {
 </section>
 <section id="what-is-a-variational-autoencoder" class="level1">
 <h1>What is a Variational AutoEncoder</h1>
-<p>The benefit of a Variational AutoEncoder is to place restrictions on the latent space to actually define a probability distribution.</p>
+<p>The benefit of a <a href="https://arxiv.org/pdf/1312.6114.pdf">Variational AutoEncoder</a> is to place restrictions on the latent space to actually define a probability distribution.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="vae/vae_bad_model.png" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -229,9 +242,8 @@ z = \mu + \sigma \odot \epsilon
 </figure>
 </div>
 <p>We are deciding to learn a latent Gaussian distribution space, ie. the encoder outputs are the mean and variance of a Gaussian distribution, which in turn defines how we do the reparameterisation trick. You can choose any distribution but the loss and reparameterisation trick will have to be adjusted.</p>
-</section>
-<section id="what-loss-is-used-with-a-variational-autoencoder" class="level1">
-<h1>What Loss is used with a Variational AutoEncoder?</h1>
+<section id="what-loss-is-used-with-a-variational-autoencoder" class="level2">
+<h2 class="anchored" data-anchor-id="what-loss-is-used-with-a-variational-autoencoder">What Loss is used with a Variational AutoEncoder?</h2>
 <p>For a more technical derivation of the VAE and it’s loss see the brilliant <a href="https://lilianweng.github.io/posts/2018-08-12-vae/">Lil’Log blog post on VAEs</a>. For a high level overview we want the learnt probability space parameters the encoder is mapping to, to be the standard Gaussian distribution. To enforce this we use the <a href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback–Leibler divergence</a> (KL) to minimise the distance between the true posterior <span class="math inline">\(p_{\theta}(z|x)\)</span> and the estimated (and assumed to be gaussian) distribution <span class="math inline">\(q_{\phi}(z|x)\)</span>.</p>
 <p>After a bit of expansion and moving terms of <span class="math inline">\(D_{KL}(q_{\phi}(z|x)||p_{\theta}(z|x))\)</span> we find:</p>
 <p><span class="math display">\[
@@ -242,9 +254,90 @@ log(p(x_i)) \geq - D_{KL}(q_{\phi}(z|x_i)||p(z)) + E_{\sim q_{\phi}(z|x_i)} \lef
 <p><span class="math display">\[
 L = - \sum_{j=1}^D \frac{1}{2} [ 1 + log(\sigma_j^2) - \mu_j^2] - \sum_{i=1}^N (||x_i - \hat{x_i}||^2_2)
 \]</span></p>
-<p>where <span class="math inline">\(N\)</span> is the total number datapoints in your dataset, <span class="math inline">\(D\)</span> is the dimension of your latent space <span class="math inline">\(z\)</span>, and $ is an output from our model from a single sampled <span class="math inline">\(q_{\phi}(z|x_i)\)</span>. During training you can sample multiple <span class="math inline">\(z_i\)</span> to generate multiple but with a large enough dataset sampling once is enough to get a good enough estimation of <span class="math inline">\(q_{\phi}(z|x)\)</span>.</p>
+<p>where <span class="math inline">\(N\)</span> is the total number datapoints in your dataset, <span class="math inline">\(D\)</span> is the dimension of your latent space <span class="math inline">\(z\)</span>, and $ is an output from our model from a single sampled <span class="math inline">\(q_{\phi}(z|x_i)\)</span>. During training you can sample multiple <span class="math inline">\(z_i\)</span> to generate multiple <span class="math inline">\(\hat{x_i}\)</span> but with a large enough dataset sampling once is fine to get a good enough estimation of <span class="math inline">\(q_{\phi}(z|x)\)</span>.</p>
+</section>
+</section>
+<section id="autoencoder-vs-variational-autoencoder" class="level1">
+<h1>AutoEncoder vs Variational AutoEncoder</h1>
+<p>Now we can train up some models and compare the results. <a href="https://github.com/fclarke1/autoencoders-and-vae">Here</a> is code I wrote to train a AutoEncoder and a VAE using the MNIST digit character set. Both models use a fully connected neural net for the encoder and decoder and have a two dimensional latent space. They are the same except the VAE encoder outputs a two dimensional mean <span class="math inline">\(\mu\)</span> and two dimensional <span class="math inline">\(\sigma^2\)</span> (for the diagonal covariance), which used to sample a two dimensional <span class="math inline">\(z\)</span> as input to the decoder.</p>
+<section id="performance-as-autoencoders" class="level2">
+<h2 class="anchored" data-anchor-id="performance-as-autoencoders">Performance as AutoEncoders</h2>
+<p>First, lets have a look at how well both models perform as AutoEncoders. Given an input how close is the output generated from each model? Using the validation set each model achieves a picel-wise accuracy of about 92% after 30 epochs. Visually both models clearly perform well.</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><img src="vae/outputs_auto.png" class="img-fluid" style="width:90.0%"></td>
+<td><img src="vae/outputs_vae.png" class="img-fluid" style="width:90.0%"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="generating-digits" class="level2">
+<h2 class="anchored" data-anchor-id="generating-digits">Generating Digits</h2>
+<p>Now for the more interesting parts. First we try generating digits using both models. To do this we sample <span class="math inline">\(z\)</span> from a standard 2D Guassian distribution, and then feed <span class="math inline">\(z\)</span> into the model’s decoder to generate an output. We repeat this 81 times to get a 9x9 grid of generated digits from each model.</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>AutoEncoder</th>
+<th>VAE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="vae/sample_from_norm_auto.png" class="img-fluid" style="width:90.0%"></td>
+<td><img src="vae/sample_from_norm_vae.png" class="img-fluid" style="width:90.0%"></td>
+</tr>
+</tbody>
+</table>
+<p>It worked! We are generating hand-written digits. I think that’s pretty cool. Both models seem pretty good, but looking closer I would say the VAE model is a bit better, it’s definietly not perfect but there are less ‘bad’ generated digits.</p>
+<p>If we look at the latent space of each model a bit more we should be able to get a view why this is.</p>
+</section>
+<section id="latent-space-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="latent-space-distribution">Latent Space Distribution</h2>
+<p>This is the crux of the whole reason we are comparing AutoEncoders to VAEs - the latent space should be more structured compared to the AutoEncoder. The VAE loss ensures this, whereas the AutoEncoder loss only cares about the generated image (from the training set).</p>
+<p>Below we are mapping the encoded <span class="math inline">\(z\)</span> 2D values of input digit images for each model, I’ve also added a colour labelling for each point.</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>AutoEncoder</th>
+<th>VAE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="vae/latent_dist_auto.png" class="img-fluid" style="width:100.0%"></td>
+<td><img src="vae/latent_dist_vae.png" class="img-fluid" style="width:100.0%"></td>
+</tr>
+</tbody>
+</table>
+<p>Now we can clearly see the difference. A few points to highlight: - VAE latent distribution is much more like a standard 2d Gaussian distribution (scale, symmetry, density) compared to the AutoEncoder - Using the AutoEncoder to generate images using the standard Gaussian, there is a very low chance of generaing the digit ‘1’. Whereas the VAE has all digits relatively close to [0,0] so there is a decent chance of generating all digits (this can be seen in the ‘Generating Digits’ image)</p>
+<p># Thoughts Going through the first principles to create and train a VAE model and compare it to a vanilla AutoEncoer has really illuminated a few things:</p>
+<ol type="1">
+<li><p>VAE enforces restrictions on the latent space using the ELBO in the loss derivation.</p></li>
+<li><p>Any distribution can be used to enforce on the latent distribution, but there is a closed form for the loss using a Gaussian with a diagonal covarience.</p></li>
+<li><p>AutoEncoders can be used to generate images but you have to be much more careful how you’re sampling you latent space <span class="math inline">\(z\)</span>. Probably the best way is to perturb a known latent point <span class="math inline">\(z\)</span> you want to mimic.</p></li>
+</ol>
+<p>Further things I would love to explore on this topic would be:</p>
+<ol type="1">
+<li><p><a href="https://arxiv.org/pdf/2305.00980.pdf">Conditional Variational AutoEncoders</a> - To give more control on generating outputs from the model you can give the class you want to generate as an input feature. Otherwise, to generate a specific digit with the VAE model I’ve trained, I’d have to find the latent space point of the class I want to generate and perturb that point before inputting it into the decoder. But this doesn’t gaurantee to generate a digit of the same class.</p></li>
+<li><p>Using a non-Gaussian distribution in the ELBO derivation for the VAE loss - would using a more complex distribution improve the performance of generating outputs?</p></li>
+<li><p>Style Encoding - it would be great to be able to input a reference image (of the same or different class you want to generate) and then generate outputs with a similar style. I’ve seen it <a href="https://google.github.io/tacotron/publications/global_style_tokens/Style%20Tokens%20Unsupervised%20Style%20Modeling%20Control%20and%20Transfer.pdf">here</a> for text-to-speech, but I think it could be applied to this with little change.</p></li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -667,20 +760,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/fclarke1">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
-  </li>  
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/clarkefred/">
-      <i class="bi bi-linkedin" role="img">
-</i> 
-    </a>
-  </li>  
-</ul>
+      &nbsp;
     </div>
   </div>
 </footer>

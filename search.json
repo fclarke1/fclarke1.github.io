@@ -18,7 +18,7 @@
     "href": "index.html#experience",
     "title": "Fred Clarke",
     "section": "Experience",
-    "text": "Experience\nDeepZen | Machine Learning Researcher | Jan 2024 - Present\nDeepZen | Machine Learning Internship | May 2023 - Aug 2023\nMOJU | Data Analytics Engineer | Sep 2022 - Mar 2023\nMOJU | Data and Business Intelligence Manager | Feb 2022 - Sep 2022\nMOJU | Operations Manager | Oct 2019 - Feb 2022"
+    "text": "Experience\nDeepZen | Machine Learning Researcher | Jan 2024 - Present\nDeepZen | Machine Learning Intern | May 2023 - Aug 2023\nMOJU | Data Analytics Engineer | Sep 2022 - Mar 2023\nMOJU | Data and Business Intelligence Manager | Feb 2022 - Sep 2022\nMOJU | Operations Manager | Oct 2019 - Feb 2022\ninnocent | S&OP Manager | Nov 2018 - Oct 2019"
   },
   {
     "objectID": "index.html#fun",
@@ -28,6 +28,13 @@
     "text": "Fun\nRock climbing | Reading | Anything involving the sea (sailing, SUP, swimming)"
   },
   {
+    "objectID": "index.html#contact-me",
+    "href": "index.html#contact-me",
+    "title": "Fred Clarke",
+    "section": "Contact Me",
+    "text": "Contact Me\nAlways open to hearing from people on any ideas or opportunities:\nfl_clarke ‘at’ hotmail.co.uk"
+  },
+  {
     "objectID": "exploration/index.html",
     "href": "exploration/index.html",
     "title": "Exploration",
@@ -35,59 +42,45 @@
     "text": "Exploring is fun, and I find the best way to learn. So any little bits I want to understand more, or find interesting I’ll drop in here\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutoEncoders vs Variational AutoEncoders\n\n\n\n\n\n\nmachine learning\n\n\n\nWhat is a Variational AutoEncoder, and how does it differ from a Variational AutoEncoder?\n\n\n\n\n\nMar 11, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "projects/index.html",
-    "href": "projects/index.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Here are some of my more standalone projects\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariational AutoEncoders\n\n\n\n\n\n\nmachine learning\n\n\n\nGenerating digits using VAEs\n\n\n\n\n\nMar 11, 2024\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "projects/vae.html",
-    "href": "projects/vae.html",
-    "title": "Variational AutoEncoders",
-    "section": "",
-    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
-  },
-  {
-    "objectID": "projects/vae.html#what-is-an-autoencoder",
-    "href": "projects/vae.html#what-is-an-autoencoder",
-    "title": "Variational AutoEncoders",
-    "section": "",
-    "text": "AutoEncoders are a clever way to learn a latent representation of whatever it is you have. In our case that’s numerical digits."
-  },
-  {
-    "objectID": "projects/vae.html#how-does-it-work",
-    "href": "projects/vae.html#how-does-it-work",
-    "title": "Variational AutoEncoders",
-    "section": "How does it work",
-    "text": "How does it work\nA machine learning model that tries to predict the input as it’s output. So ideally it’s learning the identity function. However it’s designed with a information bottleneck in the middle.\nThe hope is the model will learn the key features of the input and discard less useful information."
-  },
-  {
-    "objectID": "projects/vae.html#why-use-autoencoders",
-    "href": "projects/vae.html#why-use-autoencoders",
-    "title": "Variational AutoEncoders",
-    "section": "Why use AutoEncoders?",
-    "text": "Why use AutoEncoders?\nThere are few reasons:\n\nUnsupervised Learning Notice that during our training the input itself was the label? This means you can learn from a large dataset without any labels. Then the learnt latent space can be fine-tuned or used for many other things. For example Wav2Vec is a fine-tuned latent space, pre-trained on a large dataset of speech audio followed by fine-tuning for speech recognition on a smaller labelled dataset\nGenerating new objects they can be the start of generating new data. Take any point in the latent space and put it through the decoder and you’ll get a new object. But there’s no gaurantee it will look great. That’s where VAE comes in"
-  },
-  {
     "objectID": "exploration/vae.html",
     "href": "exploration/vae.html",
     "title": "AutoEncoders vs Variational AutoEncoders",
     "section": "",
-    "text": "This write up is in progress - however the code for this project is completed and there is a shorter write up with code on my GitHub"
+    "text": "Here is my code for any models and images used in this post."
   },
   {
     "objectID": "exploration/vae.html#whats-the-purpose-of-an-autoencoder",
     "href": "exploration/vae.html#whats-the-purpose-of-an-autoencoder",
     "title": "AutoEncoders vs Variational AutoEncoders",
     "section": "What’s the purpose of an AutoEncoder?",
-    "text": "What’s the purpose of an AutoEncoder?\nThere are a few benefits of an AutoEncoder: 1. Unsupervised Learning In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.\n\nDimensionality Reduction Having a latent space that has hopefully learnt the key information of an object (eg. handwritten digit images) can be incredibly useful. These representations can then be used in other processes. For example Facebook did something similar when creating a speech representation called wav2vec 2.0 which was learnt solely from unlabelled speech audio to learn a latent space. Then the Wav2Vec 2.0 latent space was in a model for Automatic Speech Recognition.\nGenerating New Outputs Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. However there are issues doing this, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. That’s where the Variational AutoEncoder comes in"
+    "text": "What’s the purpose of an AutoEncoder?\nThere are a few benefits of an AutoEncoder:\n\nUnsupervised Learning In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.\nDimensionality Reduction Having a latent space that has hopefully learnt the key information of an object (eg. handwritten digit images) can be incredibly useful. These representations can then be used in other processes. For example Facebook did something similar when creating a speech representation called wav2vec 2.0 which was learnt solely from unlabelled speech audio to learn a latent space. Then the Wav2Vec 2.0 latent space was in a model for Automatic Speech Recognition.\nGenerating New Outputs Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. However there are issues doing this, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. That’s where the Variational AutoEncoder comes in"
+  },
+  {
+    "objectID": "exploration/vae.html#what-loss-is-used-with-a-variational-autoencoder",
+    "href": "exploration/vae.html#what-loss-is-used-with-a-variational-autoencoder",
+    "title": "AutoEncoders vs Variational AutoEncoders",
+    "section": "What Loss is used with a Variational AutoEncoder?",
+    "text": "What Loss is used with a Variational AutoEncoder?\nFor a more technical derivation of the VAE and it’s loss see the brilliant Lil’Log blog post on VAEs. For a high level overview we want the learnt probability space parameters the encoder is mapping to, to be the standard Gaussian distribution. To enforce this we use the Kullback–Leibler divergence (KL) to minimise the distance between the true posterior \\(p_{\\theta}(z|x)\\) and the estimated (and assumed to be gaussian) distribution \\(q_{\\phi}(z|x)\\).\nAfter a bit of expansion and moving terms of \\(D_{KL}(q_{\\phi}(z|x)||p_{\\theta}(z|x))\\) we find:\n\\[\nlog(p(x_i)) \\geq - D_{KL}(q_{\\phi}(z|x_i)||p(z)) + E_{\\sim q_{\\phi}(z|x_i)} \\left[ log(p_{\\theta}(x_i|z)) \\right]\n\\]\nWhere \\(x_i\\) is a single data point (hand drawn digit). The right handside of the equation is known as the Evidence Lower Bound (ELBO) because maximising it maximises the log-liklihood of of our data. The first \\(D_{KL}\\) is known as the regularizer because it is a constraint on the distribution we are learning \\(q_{\\phi}\\). The second term is known as the reconstruction term because it is a measure on the liklihood of the reconstructed data output. It’s reconstructed because the \\(p_{\\theta}\\) probability is conditioned on \\(z\\).\nHowever we have not explicitly chosen any restrictions on what distributions we are using. As mentioned you can restrict \\(q\\) to be of any type of distribution, but if we choose a multivariate Gaussian with a diagonal covariance then we can create a closed form loss function \\(L\\). An easy to follow derivation of this can be found in Odaibo’s derivation, and we get the following loss:\n\\[\nL = - \\sum_{j=1}^D \\frac{1}{2} [ 1 + log(\\sigma_j^2) - \\mu_j^2] - \\sum_{i=1}^N (||x_i - \\hat{x_i}||^2_2)\n\\]\nwhere \\(N\\) is the total number datapoints in your dataset, \\(D\\) is the dimension of your latent space \\(z\\), and $ is an output from our model from a single sampled \\(q_{\\phi}(z|x_i)\\). During training you can sample multiple \\(z_i\\) to generate multiple \\(\\hat{x_i}\\) but with a large enough dataset sampling once is fine to get a good enough estimation of \\(q_{\\phi}(z|x)\\)."
+  },
+  {
+    "objectID": "exploration/vae.html#performance-as-autoencoders",
+    "href": "exploration/vae.html#performance-as-autoencoders",
+    "title": "AutoEncoders vs Variational AutoEncoders",
+    "section": "Performance as AutoEncoders",
+    "text": "Performance as AutoEncoders\nFirst, lets have a look at how well both models perform as AutoEncoders. Given an input how close is the output generated from each model? Using the validation set each model achieves a picel-wise accuracy of about 92% after 30 epochs. Visually both models clearly perform well."
+  },
+  {
+    "objectID": "exploration/vae.html#generating-digits",
+    "href": "exploration/vae.html#generating-digits",
+    "title": "AutoEncoders vs Variational AutoEncoders",
+    "section": "Generating Digits",
+    "text": "Generating Digits\nNow for the more interesting parts. First we try generating digits using both models. To do this we sample \\(z\\) from a standard 2D Guassian distribution, and then feed \\(z\\) into the model’s decoder to generate an output. We repeat this 81 times to get a 9x9 grid of generated digits from each model.\n\n\n\n\n\n\n\nAutoEncoder\nVAE\n\n\n\n\n\n\n\n\n\nIt worked! We are generating hand-written digits. I think that’s pretty cool. Both models seem pretty good, but looking closer I would say the VAE model is a bit better, it’s definietly not perfect but there are less ‘bad’ generated digits.\nIf we look at the latent space of each model a bit more we should be able to get a view why this is."
+  },
+  {
+    "objectID": "exploration/vae.html#latent-space-distribution",
+    "href": "exploration/vae.html#latent-space-distribution",
+    "title": "AutoEncoders vs Variational AutoEncoders",
+    "section": "Latent Space Distribution",
+    "text": "Latent Space Distribution\nThis is the crux of the whole reason we are comparing AutoEncoders to VAEs - the latent space should be more structured compared to the AutoEncoder. The VAE loss ensures this, whereas the AutoEncoder loss only cares about the generated image (from the training set).\nBelow we are mapping the encoded \\(z\\) 2D values of input digit images for each model, I’ve also added a colour labelling for each point.\n\n\n\n\n\n\n\nAutoEncoder\nVAE\n\n\n\n\n\n\n\n\n\nNow we can clearly see the difference. A few points to highlight: - VAE latent distribution is much more like a standard 2d Gaussian distribution (scale, symmetry, density) compared to the AutoEncoder - Using the AutoEncoder to generate images using the standard Gaussian, there is a very low chance of generaing the digit ‘1’. Whereas the VAE has all digits relatively close to [0,0] so there is a decent chance of generating all digits (this can be seen in the ‘Generating Digits’ image)\n# Thoughts Going through the first principles to create and train a VAE model and compare it to a vanilla AutoEncoer has really illuminated a few things:\n\nVAE enforces restrictions on the latent space using the ELBO in the loss derivation.\nAny distribution can be used to enforce on the latent distribution, but there is a closed form for the loss using a Gaussian with a diagonal covarience.\nAutoEncoders can be used to generate images but you have to be much more careful how you’re sampling you latent space \\(z\\). Probably the best way is to perturb a known latent point \\(z\\) you want to mimic.\n\nFurther things I would love to explore on this topic would be:\n\nConditional Variational AutoEncoders - To give more control on generating outputs from the model you can give the class you want to generate as an input feature. Otherwise, to generate a specific digit with the VAE model I’ve trained, I’d have to find the latent space point of the class I want to generate and perturb that point before inputting it into the decoder. But this doesn’t gaurantee to generate a digit of the same class.\nUsing a non-Gaussian distribution in the ELBO derivation for the VAE loss - would using a more complex distribution improve the performance of generating outputs?\nStyle Encoding - it would be great to be able to input a reference image (of the same or different class you want to generate) and then generate outputs with a similar style. I’ve seen it here for text-to-speech, but I think it could be applied to this with little change."
   }
 ]

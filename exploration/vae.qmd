@@ -36,4 +36,45 @@ Having a latent space that has hopefully learnt the key information of an object
 3. Generating New Outputs
 Once a latent space is learnt, you can then take a point from the latent space and feed it into the decoder to generate a new unseen object. **However there are issues doing this**, the latent space is not structured, and therefore there is no gaurentee the generated image has any meaning when decoded. **That's where the Variational AutoEncoder comes in**
 
+
 # What is a Variational AutoEncoder
+The benefit of a Variational AutoEncoder is to place restrictions on the latent space to actually define a probability distribution. 
+
+![Encoder directly mapping to a probability distribution, then sampling from the distribution causes a back propogation issue](vae/vae_bad_model.png){width=80%}
+
+So if we do this directly so that the encoder maps to a probability distributiion and then we sample from that distribution, we are unable to train the model like this because the back propogation has a stochastic element. Instead we do the **reparameterization trick**. To do this the stochastic element is removed from the encoder, instead the encoder maps to parameters of the probability distribution, and we sample the stochastic element from an static distribution, $\epsilon \sim \mathcal{N}(0, I)$. Therefore we define the latent variable as:
+
+$$
+z = \mu + \sigma \odot \epsilon
+$$
+
+The benefit of this is there is no stochastic back propogation anymore. This becomes clear when we look at the computational graph and show the backpropogation. By sampling \epsilon from a static probability distribution that isn't learnt, the gradient backpropogation can extend through the encoders deterministically.
+
+![Backpropogation is deterministic when using the reparameterisation trick](vae/reparameterization_trick.png){width=80%}
+
+So now if we put all this together we can look at the model architecture. 
+
+![Variational AutoEncoder model architecture where the learnt latent probability space is a Guassian distribution](vae/vae_model.png){width=80%}
+
+We are deciding to learn a latent Gaussian distribution space, ie. the encoder outputs are the mean and variance of a Gaussian distribution, which in turn defines how we do the reparameterisation trick. You can choose any distribution but the loss and reparameterisation trick will have to be adjusted.
+
+
+# What Loss is used with a Variational AutoEncoder?
+For a more technical derivation of the VAE and it's loss see the brilliant [Lil'Log blog post on VAEs](https://lilianweng.github.io/posts/2018-08-12-vae/). For a high level overview we want the learnt probability space parameters the encoder is mapping to, to be the standard Gaussian distribution. To enforce this we use the [Kullback–Leibler divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) (KL) to minimise the distance between the true posterior $p_{\theta}(z|x)$ and the estimated (and assumed to be gaussian) distribution $q_{\phi}(z|x)$. 
+
+After a bit of expansion and moving terms of $D_{KL}(q_{\phi}(z|x)||p_{\theta}(z|x))$ we find:
+
+$$
+log(p(x_i)) \geq - D_{KL}(q_{\phi}(z|x_i)||p(z)) + E_{\sim q_{\phi}(z|x_i)} \left[ log(p_{\theta}(x_i|z)) \right]
+$$
+
+Where $x_i$ is a single data point (hand drawn digit). The right handside of the equation is known as the Evidence Lower Bound (ELBO) because maximising it maximises the log-liklihood of of our data. The first $D_{KL}$ is known as the regularizer because it is a constraint on the distribution we are learning $q_{\phi}$. The second term is known as the reconstruction term because it is a measure on the liklihood of the reconstructed data output. It's reconstructed because the $p_{\theta}$ probability is conditioned on $z$.
+
+However we have not explicitly chosen any restrictions on what distributions we are using. As mentioned you can restrict $q$ to be of any type of distribution, but if we choose a multivariate Gaussian with a diagonal covariance then we can create a closed form loss function $L$. An easy to follow derivation of this can be found in [Odaibo's derivation](https://arxiv.org/abs/1907.08956), and we get the following loss:
+
+$$
+L = - \sum_{j=1}^D \frac{1}{2} [ 1 + log(\sigma_j^2) - \mu_j^2] - \sum_{i=1}^N (||x_i - \hat{x_i}||^2_2)
+$$
+
+where $N$ is the total number datapoints in your dataset, $D$ is the dimension of your latent space $z$, and $\hat{x_i} is an output from our model from a single sampled $q_{\phi}(z|x_i)$. During training you can sample multiple $z_i$ to generate multiple \hat{x_i} but with a large enough dataset sampling once is enough to get a good enough estimation of $q_{\phi}(z|x)$.
+

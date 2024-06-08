@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-06-08">
+<meta name="description" content="Building an 8-Bit CPU using low-level TTL chips">
 
-<title>Fred Clarke - About</title>
+<title>Fred Clarke - Building an 8-Bit Computer from Scratch</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,18 +25,18 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -52,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -62,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Fred Clarke</span>
     </a>
   </div>
@@ -72,16 +74,24 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./exploration/index.html"> 
+    <a class="nav-link" href="../exploration/index.html"> 
 <span class="menu-text">Exploration</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
-<span class="menu-text">About</span></a>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fclarke1"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/clarkefred/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -95,21 +105,48 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-does-a-cpu-work" id="toc-how-does-a-cpu-work" class="nav-link active" data-scroll-target="#how-does-a-cpu-work">How does a CPU work?</a></li>
+  <li><a href="#extensions-in-my-build" id="toc-extensions-in-my-build" class="nav-link" data-scroll-target="#extensions-in-my-build">Extensions in my build</a></li>
+  <li><a href="#how-do-you-program-the-cpu" id="toc-how-do-you-program-the-cpu" class="nav-link" data-scroll-target="#how-do-you-program-the-cpu">How do you program the CPU</a></li>
+  <li><a href="#an-example-program" id="toc-an-example-program" class="nav-link" data-scroll-target="#an-example-program">An example program</a>
+  <ul class="collapse">
+  <li><a href="#add-x-y" id="toc-add-x-y" class="nav-link" data-scroll-target="#add-x-y">Add X + Y</a></li>
+  <li><a href="#fibonacci-sequence" id="toc-fibonacci-sequence" class="nav-link" data-scroll-target="#fibonacci-sequence">Fibonacci Sequence</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
-</div>
+<h1 class="title">Building an 8-Bit Computer from Scratch</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">electronics</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Building an 8-Bit CPU using low-level TTL chips
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2024-06-08</p>
+    </div>
+  </div>
   
     
   </div>
@@ -119,9 +156,280 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<p>Having done a fair bit of programming I eventually asked myself <em>how does a computer actually work and run a program?</em> Initially I thought it would be a quick google, watch a few videos and then that was that. But after at least 100 hours of work, I can confidently say I’m satisfied with the answer I got.</p>
+<p>What it comes down to is the CPU, this is the brain of the computer. All programming code, no matter what language, is eventually compiled into machine language the CPU can run a program with. So of course I had to build my own CPU using only low-level TTL chips.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="8bit_computer/low_overview.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>CPU overview</figcaption>
+</figure>
+</div>
+<p>After a bit of a convoluted journey, and an initial failed attempt, I finally have a working 8-bit programmable computer that runs on a custom machine code. I have to say, there were two incredible resources for this: 1. <a href="https://www.youtube.com/watch?v=HyznrdDSSGM&amp;list=PLowKtXNTBypGqImE405J2565dvjafglHU&amp;ab_channel=BenEater">Ben Eater’s 8-bit computer</a> YouTube series. An incredible series where Ben starts from the absolute fundementals, and explains how every chip works from the level of transistors. I highly recommend his series, even just to watch and not follow the build. 2. <a href="https://www.reddit.com/r/beneater/">Reddit</a>. Even though Ben Eater’s series is fantastic, no one understands how his computer actually works because there are so many shortcuts he takes. This is where I failed first time, I followed blindly and came to many power issues. Luckily a few years later I found the subreddit on Ben Eater’s 8-bit computer and it had so much information on how to fix the issues I previously had. This gave me the confidence to jump into the build again.</p>
+<section id="how-does-a-cpu-work" class="level1">
+<h1>How does a CPU work?</h1>
+<p>If you want all the detail Ben Eater’s series is definietly the place to go. But I’ll give a quick overview of each modules in the CPU:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="8bit_computer/SAP_architecture.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>SAP architecture (Simple-As-Possible)</figcaption>
+</figure>
+</div>
+<p>I was building the most simple architecture for a programmable CPU, but it still contains all major components. It’s a very modular design, so we can think of the main modules as: - Clock: synchronises all other modules and data transfer. My CPU is upto 1MHz - ALU: where the calculations happen. My CPU can only add and subtract - Register A/B: Used to store actively used data. Each register can hold one 8-bit number - RAM: this is where your program is stored, can hold only 16x 8-bit numbers - Memory Register: used to select a RAM data line, eg. get the 8-bit number stored at index 4 (out of 16) - Instruction Register: translates the machine code into a control word which controls all other modules - Program Counter: counts what line (ie. what line in RAM) the program is currently on - Output Register: used to display an 8-bit number to the user - BUS: used to transfer data around the CPU between modules</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="8bit_computer/skyline.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>data bus on my CPU build</figcaption>
+</figure>
+</div>
+</section>
+<section id="extensions-in-my-build" class="level1">
+<h1>Extensions in my build</h1>
+<p>To test my understanding I wanted to build some additional functionality in my CPU that wasn’t in Ben Eater’s original. But after spending over 100 hours I wanted to do the simplest thing possible. So I implemented the capability to put the value 1 on the BUS directly without having to enter the value 1 in the machine code. This means I could write microcode to increment or decrement a value in the RAM by 1 using only one line of code. Without this change it would have taken 3 lines of code, (load RAM, subtract 1, save to RAM). I’m particularly proud of this because I haven’t seen an extension like this before, and it enables programs that weren’t possible before, for example Factorial.</p>
+</section>
+<section id="how-do-you-program-the-cpu" class="level1">
+<h1>How do you program the CPU</h1>
+<p>Using the machine code instructions below you can write a program. For the computer to run the program it needs to be manually entered into the RAM using DIP switches - these are the red toggles on the CPU. Then once the RAM is loaded start the clock and it will follow the instructions.</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Machine Code</th>
+<th>Instruction</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0000</td>
+<td>NOP</td>
+<td>No operation</td>
+</tr>
+<tr class="even">
+<td>0001</td>
+<td>LDA X</td>
+<td>Load RAM line X into Register A</td>
+</tr>
+<tr class="odd">
+<td>0010</td>
+<td>ADD X</td>
+<td>Add RAM line X to Register A</td>
+</tr>
+<tr class="even">
+<td>0011</td>
+<td>SUB X</td>
+<td>Subtract RAM line X from Register A</td>
+</tr>
+<tr class="odd">
+<td>0100</td>
+<td>STA X</td>
+<td>Store Register A in RAM line X</td>
+</tr>
+<tr class="even">
+<td>0101</td>
+<td>LDI X</td>
+<td>Load (immediate) value X into Register A</td>
+</tr>
+<tr class="odd">
+<td>0110</td>
+<td>ADI X</td>
+<td>Add (immediate) value X to Register A</td>
+</tr>
+<tr class="even">
+<td>0111</td>
+<td>SUI X</td>
+<td>Subtract (immediate) value X from Register A</td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td>JMP X</td>
+<td>Jump to RAM line X (change program counter to X)</td>
+</tr>
+<tr class="even">
+<td>1001</td>
+<td>JC X</td>
+<td>Jump to RAM line X if carry (ie. if ALU has rolled past 255)</td>
+</tr>
+<tr class="odd">
+<td>1010</td>
+<td>JNC X</td>
+<td>Jump to Ram line X if not carry</td>
+</tr>
+<tr class="even">
+<td>1011</td>
+<td>INC X</td>
+<td>increment RAM line X by 1</td>
+</tr>
+<tr class="odd">
+<td>1100</td>
+<td>DEC X</td>
+<td>decrement RAM line X by 1</td>
+</tr>
+<tr class="even">
+<td>1101</td>
+<td>SWP X</td>
+<td>Swap Register A with RAM line X</td>
+</tr>
+<tr class="odd">
+<td>1110</td>
+<td>OUT</td>
+<td>Register A to Output Register</td>
+</tr>
+<tr class="even">
+<td>1111</td>
+<td>HLT</td>
+<td>Halt the program (stop the clock)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="an-example-program" class="level1">
+<h1>An example program</h1>
+<section id="add-x-y" class="level2">
+<h2 class="anchored" data-anchor-id="add-x-y">Add X + Y</h2>
+<p>The code below is adding 42 + 13. The values 42 and 13 are part of the program and entered on lines 4 and 5. The CPU always starts at line 0 and works sequentially (unless there is a jump). Walking through the program we have:</p>
+<ol start="0" type="1">
+<li>Load 42 into register A</li>
+<li>Add 13 to register A (42) and store answer in register A</li>
+<li>output register A</li>
+<li>stop the program</li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Line</th>
+<th>Instruction</th>
+<th>Machine Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>LDA 4</td>
+<td>0001 0010</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>ADD 5</td>
+<td>0010 0011</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>OUT</td>
+<td>1110 xxxx</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>HLT</td>
+<td>1111 xxxx</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>42</td>
+<td>0010 1010</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>13</td>
+<td>0000 1101</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="8bit_computer/low_alu.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>The ALU - where the addition and subtraction take place</figcaption>
+</figure>
+</div>
+</section>
+<section id="fibonacci-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="fibonacci-sequence">Fibonacci Sequence</h2>
+<p>This is a bit of a step up from the one above. It has the conditional JC which jumps if the carry flag is set. The flag is set if the previous add (or SUB, DEC, INC) causes an overflow. So line 6 JC will only trigger when the sequence is above 255 (the largest number the CPU can handle) and will go back to the beginning of the program, otherwise it will skip and go to line 7.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Line</th>
+<th>Instruction</th>
+<th>Machine Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>LDI 1</td>
+<td>0101 0001</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>STA 11</td>
+<td>0100 1111</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>STA 12</td>
+<td>0100 1110</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>OUT</td>
+<td>1110 xxxx</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>STA 12</td>
+<td>0100 1110</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>ADD 11</td>
+<td>0010 1111</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>JC 0</td>
+<td>1001 0000</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>SWP 12</td>
+<td>1101 1110</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>STA 11</td>
+<td>0100 1111</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>LDA 12</td>
+<td>0001 1110</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>JMP 3</td>
+<td>1000 0011</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Here’s the Finbonacci program in action.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/jxfy_muATZQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -205,7 +513,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/fclarke1\.github\.io\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -543,20 +851,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/fclarke1">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
-  </li>  
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/clarkefred/">
-      <i class="bi bi-linkedin" role="img">
-</i> 
-    </a>
-  </li>  
-</ul>
+      &nbsp;
     </div>
   </div>
 </footer>

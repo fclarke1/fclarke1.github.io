@@ -2,6 +2,7 @@
   {
     "listing": "/exploration/index.html",
     "items": [
+      "/exploration/8bit_computer.html",
       "/exploration/vae.html"
     ]
   }

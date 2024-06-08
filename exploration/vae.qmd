@@ -12,7 +12,7 @@ date-format: iso
 date: 2024-03-11
 ---
 
-This write up is in progress - however the code for this project is completed and there is a [shorter write up with code on my GitHub](https://github.com/fclarke1/autoencoders-and-vae)
+[Here](https://github.com/fclarke1/autoencoders-and-vae) is my code for any models and images used in this post.
 
 # What is an AutoEncoder?
 AutoEncoders are a clever way to learn a latent representation of whatever object you have. It's a model that is trained to output it's input. This sounds strange but the trick is the model has an information bottleneck by reducing the dimensionality in the middle of the model. This means if the model is able to output a very good representation of the input with the bottleneck, it has learnt a reduced dimensionality representation of the input. The hope is the model has learnt the key features defining the input and it's discarded less useful information.
@@ -27,6 +27,7 @@ The only loss required for an AutoEncoder is a reconstruction loss, ie. one that
 
 ## What's the purpose of an AutoEncoder?
 There are a few benefits of an AutoEncoder:
+
 1. Unsupervised Learning
 In the previous section we never mentioned about the dataset having labels. So this is a way to learn from unlabelled datasets, and then you could transfer learnings from the encoder to another model, eg. image recognition.
 
@@ -38,7 +39,7 @@ Once a latent space is learnt, you can then take a point from the latent space a
 
 
 # What is a Variational AutoEncoder
-The benefit of a Variational AutoEncoder is to place restrictions on the latent space to actually define a probability distribution. 
+The benefit of a [Variational AutoEncoder](https://arxiv.org/pdf/1312.6114.pdf) is to place restrictions on the latent space to actually define a probability distribution. 
 
 ![Encoder directly mapping to a probability distribution, then sampling from the distribution causes a back propogation issue](vae/vae_bad_model.png){width=80%}
 
@@ -59,7 +60,7 @@ So now if we put all this together we can look at the model architecture.
 We are deciding to learn a latent Gaussian distribution space, ie. the encoder outputs are the mean and variance of a Gaussian distribution, which in turn defines how we do the reparameterisation trick. You can choose any distribution but the loss and reparameterisation trick will have to be adjusted.
 
 
-# What Loss is used with a Variational AutoEncoder?
+## What Loss is used with a Variational AutoEncoder?
 For a more technical derivation of the VAE and it's loss see the brilliant [Lil'Log blog post on VAEs](https://lilianweng.github.io/posts/2018-08-12-vae/). For a high level overview we want the learnt probability space parameters the encoder is mapping to, to be the standard Gaussian distribution. To enforce this we use the [Kullback–Leibler divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) (KL) to minimise the distance between the true posterior $p_{\theta}(z|x)$ and the estimated (and assumed to be gaussian) distribution $q_{\phi}(z|x)$. 
 
 After a bit of expansion and moving terms of $D_{KL}(q_{\phi}(z|x)||p_{\theta}(z|x))$ we find:
@@ -76,5 +77,64 @@ $$
 L = - \sum_{j=1}^D \frac{1}{2} [ 1 + log(\sigma_j^2) - \mu_j^2] - \sum_{i=1}^N (||x_i - \hat{x_i}||^2_2)
 $$
 
-where $N$ is the total number datapoints in your dataset, $D$ is the dimension of your latent space $z$, and $\hat{x_i} is an output from our model from a single sampled $q_{\phi}(z|x_i)$. During training you can sample multiple $z_i$ to generate multiple \hat{x_i} but with a large enough dataset sampling once is enough to get a good enough estimation of $q_{\phi}(z|x)$.
+where $N$ is the total number datapoints in your dataset, $D$ is the dimension of your latent space $z$, and $\hat{x_i} is an output from our model from a single sampled $q_{\phi}(z|x_i)$. During training you can sample multiple $z_i$ to generate multiple $\hat{x_i}$ but with a large enough dataset sampling once is fine to get a good enough estimation of $q_{\phi}(z|x)$.
 
+
+# AutoEncoder vs Variational AutoEncoder
+Now we can train up some models and compare the results. [Here](https://github.com/fclarke1/autoencoders-and-vae) is code I wrote to train a AutoEncoder and a VAE using the MNIST digit character set. Both models use a fully connected neural net for the encoder and decoder and have a two dimensional latent space. They are the same except the VAE encoder outputs a two dimensional mean $\mu$ and two dimensional $\sigma^2$ (for the diagonal covariance), which used to sample a two dimensional $z$ as input to the decoder.
+
+
+## Performance as AutoEncoders
+First, lets have a look at how well both models perform as AutoEncoders. Given an input how close is the output generated from each model? Using the validation set each model achieves a picel-wise accuracy of about 92% after 30 epochs. Visually both models clearly perform well.
+
+| | |
+|-----|-----|
+| ![](vae/outputs_auto.png){width=90%} | ![](vae/outputs_vae.png){width=90%} |
+
+
+## Generating Digits
+Now for the more interesting parts. First we try generating digits using both models. To do this we sample $z$ from a standard 2D Guassian distribution, and then feed $z$ into the model's decoder to generate an output. We repeat this 81 times to get a 9x9 grid of generated digits from each model.
+
+| AutoEncoder | VAE |
+|-----|-----|
+| ![](vae/sample_from_norm_auto.png){width=90%} | ![](vae/sample_from_norm_vae.png){width=90%} |
+
+It worked! We are generating hand-written digits. I think that's pretty cool. Both models seem pretty good, but looking closer I would say the VAE model is a bit better, it's definietly not perfect but there are less 'bad' generated digits.
+
+If we look at the latent space of each model a bit more we should be able to get a view why this is.
+
+
+## Latent Space Distribution
+This is the crux of the whole reason we are comparing AutoEncoders to VAEs - the latent space should be more structured compared to the AutoEncoder. The VAE loss ensures this, whereas the AutoEncoder loss only cares about the generated image (from the training set).
+
+Below we are mapping the encoded $z$ 2D values of input digit images for each model, I've also added a colour labelling for each point.
+
+| AutoEncoder | VAE |
+|-----|-----|
+| ![](vae/latent_dist_auto){width=100%} | ![](vae/latent_dist_vae.png){width=100%} |
+
+Now we can clearly see the difference. A few points to highlight:
+ - VAE latent distribution is much more like a standard 2d Gaussian distribution (scale, symmetry, density) compared to the AutoEncoder
+ - Using the AutoEncoder to generate images using the standard Gaussian, there is a very low chance of generaing the digit '1'. Whereas the VAE has all digits relatively close to [0,0] so there is a decent chance of generating all digits (this can be seen in the 'Generating Digits' image)
+
+
+ # Thoughts
+ Going through the first principles to create and train a VAE model and compare it to a vanilla AutoEncoer has really illuminated a few things:
+ 
+ 1. VAE enforces restrictions on the latent space using the ELBO in the loss derivation.
+ 
+ 2. Any distribution can be used to enforce on the latent distribution, but there is a closed form for the loss using a Gaussian with a diagonal covarience.
+ 
+ 3. AutoEncoders can be used to generate images but you have to be much more careful how you're sampling you latent space $z$. Probably the best way is to perturb a known latent point $z$ you want to mimic.
+
+
+ Further things I would love to explore on this topic would be:
+ 
+ 1. [Conditional Variational AutoEncoders](https://arxiv.org/pdf/2305.00980.pdf) - To give more control on generating outputs from the model you can give the class you want to generate as an input feature. Otherwise, to generate a specific digit with the VAE model I've trained, I'd have to find the latent space point of the class I want to generate and perturb that point before inputting it into the decoder. But this doesn't gaurantee to generate a digit of the same class.
+
+ 2. Using a non-Gaussian distribution in the ELBO derivation for the VAE loss - would using a more complex distribution improve the performance of generating outputs?
+
+ 3. Style Encoding - it would be great to be able to input a reference image (of the same or different class you want to generate) and then generate outputs with a similar style. I've seen it [here](https://google.github.io/tacotron/publications/global_style_tokens/Style%20Tokens%20Unsupervised%20Style%20Modeling%20Control%20and%20Transfer.pdf) for text-to-speech, but I think it could be applied to this with little change.
+
+
+ 

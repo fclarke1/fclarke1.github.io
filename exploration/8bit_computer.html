@@ -164,7 +164,11 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>CPU overview</figcaption>
 </figure>
 </div>
-<p>After a bit of a convoluted journey, and an initial failed attempt, I finally have a working 8-bit programmable computer that runs on a custom machine code. I have to say, there were two incredible resources for this: 1. <a href="https://www.youtube.com/watch?v=HyznrdDSSGM&amp;list=PLowKtXNTBypGqImE405J2565dvjafglHU&amp;ab_channel=BenEater">Ben Eater’s 8-bit computer</a> YouTube series. An incredible series where Ben starts from the absolute fundementals, and explains how every chip works from the level of transistors. I highly recommend his series, even just to watch and not follow the build. 2. <a href="https://www.reddit.com/r/beneater/">Reddit</a>. Even though Ben Eater’s series is fantastic, no one understands how his computer actually works because there are so many shortcuts he takes. This is where I failed first time, I followed blindly and came to many power issues. Luckily a few years later I found the subreddit on Ben Eater’s 8-bit computer and it had so much information on how to fix the issues I previously had. This gave me the confidence to jump into the build again.</p>
+<p>After a bit of a convoluted journey, and an initial failed attempt, I finally have a working 8-bit programmable computer that runs on a custom machine code. I have to say, there were two incredible resources for this:</p>
+<ol type="1">
+<li><a href="https://www.youtube.com/watch?v=HyznrdDSSGM&amp;list=PLowKtXNTBypGqImE405J2565dvjafglHU&amp;ab_channel=BenEater">Ben Eater’s 8-bit computer</a> YouTube series. An incredible series where Ben starts from the absolute fundementals, and explains how every chip works from the level of transistors. I highly recommend his series, even just to watch and not follow the build.</li>
+<li><a href="https://www.reddit.com/r/beneater/">Reddit</a>. Even though Ben Eater’s series is fantastic, no one understands how his computer actually works because there are so many shortcuts he takes. This is where I failed first time, I followed blindly and came to many power issues. Luckily a few years later I found the subreddit on Ben Eater’s 8-bit computer and it had so much information on how to fix the issues I previously had. This gave me the confidence to jump into the build again.</li>
+</ol>
 <section id="how-does-a-cpu-work" class="level1">
 <h1>How does a CPU work?</h1>
 <p>If you want all the detail Ben Eater’s series is definietly the place to go. But I’ll give a quick overview of each modules in the CPU:</p>
@@ -174,7 +178,18 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>SAP architecture (Simple-As-Possible)</figcaption>
 </figure>
 </div>
-<p>I was building the most simple architecture for a programmable CPU, but it still contains all major components. It’s a very modular design, so we can think of the main modules as: - Clock: synchronises all other modules and data transfer. My CPU is upto 1MHz - ALU: where the calculations happen. My CPU can only add and subtract - Register A/B: Used to store actively used data. Each register can hold one 8-bit number - RAM: this is where your program is stored, can hold only 16x 8-bit numbers - Memory Register: used to select a RAM data line, eg. get the 8-bit number stored at index 4 (out of 16) - Instruction Register: translates the machine code into a control word which controls all other modules - Program Counter: counts what line (ie. what line in RAM) the program is currently on - Output Register: used to display an 8-bit number to the user - BUS: used to transfer data around the CPU between modules</p>
+<p>I was building the most simple architecture for a programmable CPU, but it still contains all major components. It’s a very modular design, so we can think of the main modules as:</p>
+<ul>
+<li>Clock: synchronises all other modules and data transfer. My CPU is upto 1MHz</li>
+<li>ALU: where the calculations happen. My CPU can only add and subtract</li>
+<li>Register A/B: Used to store actively used data. Each register can hold one 8-bit number</li>
+<li>RAM: this is where your program is stored, can hold only 16x 8-bit numbers</li>
+<li>Memory Register: used to select a RAM data line, eg. get the 8-bit number stored at index 4 (out of 16)</li>
+<li>Instruction Register: translates the machine code into a control word which controls all other modules</li>
+<li>Program Counter: counts what line (ie. what line in RAM) the program is currently on</li>
+<li>Output Register: used to display an 8-bit number to the user</li>
+<li>BUS: used to transfer data around the CPU between modules</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="8bit_computer/skyline.jpg" class="img-fluid figure-img" style="width:80.0%"></p>

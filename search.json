@@ -53,7 +53,7 @@
     "href": "exploration/8bit_computer.html#add-x-y",
     "title": "Building an 8-Bit Computer from Scratch",
     "section": "Add X + Y",
-    "text": "Add X + Y\nThe code below is adding 42 + 13. The values 42 and 13 are part of the program and entered on lines 4 and 5. The CPU always starts at line 0 and works sequentially (unless there is a jump). Walking through the program we have:\n\nLoad 42 into register A\nAdd 13 to register A (42) and store answer in register A\noutput register A\nstop the program\n\n\n\n\nLine\nInstruction\nMachine Code\nComment\n\n\n\n\n0\nLDA 4\n0001 0010\n\n\n\n1\nADD 5\n0010 0011\n\n\n\n2\nOUT\n1110 xxxx\n\n\n\n3\nHLT\n1111 xxxx\n\n\n\n4\n42\n0010 1010\nenter X value\n\n\n5\n13\n0000 1101\nenter Y value\n\n\n\n\n\n\nThe ALU - where the addition and subtraction take place"
+    "text": "Add X + Y\nThe code below is adding 42 + 13. The values 42 and 13 are part of the program and entered on lines 4 and 5. The CPU always starts at line 0 and works sequentially (unless there is a jump). Walking through the program we have:\n\nLoad 42 into register A\nAdd 13 to register A (42) and store answer in register A\noutput register A\nstop the program\n\n\n\n\nLine\nInstruction\nMachine Code\nComment\n\n\n\n\n0\nLDA 4\n0001 0010\nloads value in RAM line 4 into Register A\n\n\n1\nADD 5\n0010 0011\nAdd register A to value in RAM line 5\n\n\n2\nOUT\n1110 xxxx\noutput register A to display\n\n\n3\nHLT\n1111 xxxx\n\n\n\n4\n42\n0010 1010\nenter X value\n\n\n5\n13\n0000 1101\nenter Y value\n\n\n\n\n\n\nThe ALU - where the addition and subtraction take place. Currently showing 10 (register A) + 11 (register B) = 21 (ALU output)"
   },
   {
     "objectID": "exploration/8bit_computer.html#fibonacci-sequence",
